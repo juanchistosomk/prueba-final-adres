@@ -2,7 +2,8 @@
 
 ## Por: Ing. JUAN CARLOS CASTILLO G.
 
-<img src="https://freeimage.host/i/3z3afwJ">
+<a href="https://freeimage.host/i/3z3afwJ" target="_blank"><img src="https://iili.io/3z3afwJ.md.png" border="0"></a>
+<a href="https://freeimage.host/i/3zfJh8P" target="_blank"><img src="https://iili.io/3zfJh8P.md.png" border="0"></a>
 
 ### Descripción
 
@@ -27,7 +28,7 @@ Este proyecto esta basado en una aplicación web desarrollada con Flask MVC que 
 
 ## Requisitos
 
-- Python 3.8 o superior.
+- Python 3.9 o superior.
 - Flask.
 - SQLite3.
 - Flask_sqlalchemy
