@@ -3,6 +3,7 @@
 ## Por: Ing. JUAN CARLOS CASTILLO G.
 
 <a href="https://freeimage.host/i/3z3afwJ" target="_blank"><img src="https://iili.io/3z3afwJ.md.png" border="0"></a>
+<a href="https://freeimage.host/i/3zqda3l" target="_blank"><img src="https://iili.io/3zqda3l.md.png" border="0"></a>
 <a href="https://freeimage.host/i/3zfJh8P" target="_blank"><img src="https://iili.io/3zfJh8P.md.png" border="0"></a>
 
 ### Descripción
