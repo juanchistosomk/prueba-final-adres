@@ -1,0 +1,22 @@
+# Python v 3.10.6
+# .\venv\Scripts\activate
+# pip install -r requirements.txt
+
+# Framework Flask
+flask
+flask-WTF
+flask_sqlalchemy
+
+# Herramientas de desarrollo
+pytest
+pytest-flask
+pylint
+flask_restx
+dotenv
+requests
+
+
+# Otras utilidades
+lxml
+plyer
+pandas

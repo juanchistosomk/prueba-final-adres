@@ -1,0 +1,114 @@
+:root {
+  --azul-oscuro: #1a3756;
+  --azul-claro: #5bc0de;
+  --verde-azulado: #2ab7a9;
+  --blanco: #ffffff;
+}
+
+body {
+  background-color: #f8f9fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Personalización de colores en base al logo de ADRES */
+.bg-primary {
+  background-color: var(--azul-oscuro) !important;
+}
+
+.bg-secondary {
+  background-color: var(--verde-azulado) !important;
+}
+
+.bg-info {
+  background-color: #eee !important;
+}
+
+.btn-primary {
+  background-color: var(--azul-oscuro);
+  border-color: var(--azul-oscuro);
+}
+
+.btn-primary:hover {
+  background-color: #132942;
+  border-color: #132942;
+}
+
+.btn-success {
+  background-color: var(--verde-azulado);
+  border-color: var(--verde-azulado);
+}
+
+.btn-success:hover {
+  background-color: #239b90;
+  border-color: #239b90;
+}
+
+.btn-info {
+  background-color: var(--azul-claro);
+  border-color: var(--azul-claro);
+}
+
+.btn-info:hover {
+  background-color: #46a7c5;
+  border-color: #46a7c5;
+}
+
+.table-primary {
+  background-color: var(--azul-claro) !important;
+  color: var(--blanco);
+}
+
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+  border: none;
+}
+
+.card-header {
+  border-bottom: 0;
+}
+
+/* Animaciones */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(91, 192, 222, 0.1);
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+.btn-outline-light {
+  transition: all 0.2s ease;
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.user-config-button {
+  border: none;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+}
+
+.width-header {
+  height: 54px;
+}
+
+.footer {
+  background-color: var(--azul-claro) !important;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 20px;
+  }
+}

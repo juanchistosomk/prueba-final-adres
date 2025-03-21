@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADRES - Modificar Adquisición</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <header class="text-left py-4 bg-white text-white">
+        <h1 class="fw-bold">
+          <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            width="243"
+            height="45"
+          />
+        </h1>
+        <div class="text-center py-4 bg-primary bg-gradient text-white">
+          <h4>Editar adquisición</h4>
+        </div>
+      </header>
+
+      <div class="row mt-4 justify-content-center">
+        <div class="col-md-8">
+          {% if message %}
+          <div class="alert alert-primary alert-dismissible" role="alert">
+            <div>{{ message['message'] }}</div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          {% endif %}
+
+          <div class="card shadow">
+            <div class="card-header bg-secondary text-white">
+              <h5 class="mb-0">Formulario de Adquisición</h5>
+            </div>
+            <div class="card-body">
+              <form
+                id="creationForm"
+                action="/api/v1/adquisiciones/edit"
+                method="post"
+                class="needs-validation"
+                novalidate
+              >
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="presupuesto" class="form-label"
+                      >Presupuesto</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="presupuesto"
+                      id="presupuesto"
+                      value="{{ request.form.get('presupuesto', adquisicion[1]) }}"
+                      placeholder="($pesos)"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Este campo es obligatorio.
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    
+                    <label for="unidad" class="form-label">Unidad</label>
+
+                      <select name="unidad" id="unidad" class="form-control" required>
+                      <option value="">--Seleccione--</option>
+                      {% for unidad in unidades %}
+                      <option value="{{ unidad[0] }}"
+                      {% if unidad[0] == adquisicion[2] %}selected{% endif %}
+                      >{{ unidad[1] }}</option>
+                      {% endfor %}
+                    </select>
+                  
+                    <div class="invalid-feedback">
+                      Este campo es obligatorio.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="tipo" class="form-label"
+                    >Tipo de Bien o Servicio</label
+                  >
+
+                   <select name="tipo" id="tipo" class="form-control" required>
+                      <option value="">--Seleccione--</option>
+                      {% for tipo in tipos %}
+                      <option value="{{ tipo[0] }}"
+                      {% if tipo[0] == adquisicion[3]  %}selected{% endif %}
+                      >{{ tipo[1] }}</option>
+                      {% endfor %}
+                    </select>
+                
+                  <div class="invalid-feedback">Este campo es obligatorio.</div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <label for="cantidad" class="form-label">Cantidad</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="cantidad"
+                      id="cantidad"
+                      placeholder="No. unidades"
+                      required
+                      value="{{ request.form.get('cantidad', adquisicion[4]) }}"
+                      min="1"
+                    />
+                    <div class="invalid-feedback">
+                      Ingrese una cantidad válida.
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="valorUnitario" class="form-label"
+                      >Valor Unitario</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="valorUnitario"
+                      id="valorUnitario"
+                      required
+                      value="{{ request.form.get('valorUnitario', adquisicion[5]) }}"
+                      placeholder="($pesos)"
+                      min="0"
+                    />
+                    <div class="invalid-feedback">Ingrese un valor válido.</div>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="valorTotal" class="form-label"
+                      >Valor Total</label
+                    >
+                    $<input
+                      type="number"
+                      class="form-control"
+                      name="valorTotal"
+                      id="valorTotal"
+                      placeholder="(Calculado)"
+                      value="{{ request.form.get('valorTotal', adquisicion[6]) }}"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="fechaAdquisicion" class="form-label"
+                      >Fecha de Adquisición</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control"
+                      name="fechaAdquisicion"
+                      id="fechaAdquisicion"
+                      value="{{ request.form.get('fechaAdquisicion', adquisicion[7]) }}"
+                      required
+                    />
+                    <div class="invalid-feedback">Seleccione una fecha.</div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="proveedor" class="form-label">Proveedor</label>
+                     <select name="proveedor" id="proveedor" class="form-control" required>
+                      <option value="">--Seleccione--</option>
+                      {% for proveedor in proveedores %}
+                      <option value="{{ proveedor[0] }}"
+                      {% if proveedor[0] == adquisicion[8] %}selected{% endif %}
+                      >{{ proveedor[1] }}</option>
+                      {% endfor %}
+                    </select>
+                   
+                    <div class="invalid-feedback">
+                      Este campo es obligatorio.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="documentacion" class="form-label"
+                    >Documentación</label
+                  >
+                  <textarea
+                    class="form-control"
+                    name="documentacion"
+                    id="documentacion"
+                    cols="50"
+                    rows="2"
+                  >
+{{ request.form.get('documentacion', adquisicion[9]) }}</textarea
+                  >
+                </div>
+
+                <div class="d-flex justify-content-end mt-4">
+                  <input
+                    type="hidden"
+                    name="idAdquisicion"
+                    id="idAdquisicion"
+                    value="{{ request.form.get('idAdquisicion', adquisicion[0]) }}"
+                  />
+                  <button type="submit" class="btn btn-primary me-2">
+                    Guardar
+                  </button>
+
+                  <a href="/" class="btn btn-secondary me-2">Volver</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="mt-4 footer py-3 bg-primary  text-center">
+      <div class="container">
+        <span
+          >© 2025 ADRES - Administradora de los Recursos del Sistema General de
+          Seguridad Social en Salud. Autor: Ing. JCCG</span
+        >
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>

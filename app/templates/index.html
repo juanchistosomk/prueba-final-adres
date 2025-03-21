@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de Adquisiciones</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <header class="text-left py-4 bg-white text-black">
+        <div class="position-absolute top-0 end-0 p-4">
+          <button
+            class="btn btn-outline-secondary bg-gradient rounded-circle user-config-button"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="Configuración de usuario"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              fill="currentColor"
+              style="width: 50px; height: 50px; padding: 0; margin: 0"
+              class="bi bi-person-circle"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path
+                fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+              />
+            </svg>
+          </button>
+        </div>
+        <h1 class="fw-bold">
+          <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            width="243"
+            height="45"
+          />
+        </h1>
+        <div class="text-center py-4 bg-primary bg-gradient text-white">
+          <h4>- Gestión registro de requerimientos de adquisiciones -</h4>
+        </div>
+      </header>
+
+      <div class="row mt-4">
+        <!-- Sección de búsqueda -->
+        <div class="col-md-3">
+          <div class="card shadow-sm bg-info">
+            <div class="card-header p-3 bg-secondary text-white width-header">
+              <h5 class="mb-0">Búsqueda</h5>
+            </div>
+            <div class="card-body">
+              <form id="searchForm" method="post" action="/">
+                <div class="mb-3">
+                  <label for="presupuesto" class="form-label"
+                    >Presupuesto</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="presupuesto"
+                    name="presupuesto"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="unidad" class="form-label">Unidad</label>
+                  <select name="unidad" id="unidad" class="form-control">
+                    <option value="">--Todos--</option>
+                    {% for unidad in unidades %}
+                    <option value="{{ unidad[0] }}">{{ unidad[1] }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="tipo" class="form-label"
+                    >Tipo de Bien o Servicio</label
+                  >
+                  <select name="tipo" id="tipo" class="form-control">
+                    <option value="">--Todos--</option>
+                    {% for tipo in tipos %}
+                    <option value="{{ tipo[0] }}">{{ tipo[1] }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="cantidad" class="form-label">Cantidad</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="cantidad"
+                    name="cantidad"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="valorUnitario" class="form-label"
+                    >Valor Unitario</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="valorUnitario"
+                    name="valorUnitario"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="valorTotal" class="form-label">Valor Total</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="valorTotal"
+                    name="valorTotal"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="fechaAdquisicion" class="form-label"
+                    >Fecha de Adquisición</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="fechaAdquisicion"
+                    name="fechaAdquisicion"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="proveedor" class="form-label">Proveedor</label>
+                  <select name="proveedor" id="proveedor" class="form-control">
+                    <option value="">--Todos--</option>
+                    {% for proveedor in proveedores %}
+                    <option value="{{ proveedor[0] }}">
+                      {{ proveedor[1] }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="documentacion" class="form-label"
+                    >Documentación</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="documentacion"
+                    name="documentacion"
+                  />
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                  Buscar
+                </button>
+                <a href="/" class="btn btn-primary w-100 mt-3">Limpiar</a>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección de resultados -->
+        <div class="col-md-9">
+          <div class="card shadow-sm">
+            <div
+              class="card-header bg-secondary text-white d-flex justify-content-between align-items-center"
+            >
+              <h5 class="mb-0">Resultados</h5>
+              <div>
+                <a
+                  href="/crear-adquisicion"
+                  class="btn btn-info text-white me-2"
+                  >+Crear adquisición</a
+                >
+                <a href="/historial" class="btn btn-info text-white"
+                  >Historial</a
+                >
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                  <thead class="table-primary">
+                    <tr>
+                      <th>Presupuesto</th>
+                      <th>Unidad</th>
+                      <th>Tipo de Bien</th>
+                      <th>Cantidad</th>
+                      <th>Valor Unit.</th>
+                      <th>Total</th>
+                      <th>Fecha</th>
+                      <th>Proveedor</th>
+                      <th>Documentación</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="resultadosTabla">
+                    <!-- Los resultados se cargarán dinámicamente -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="mt-4 footer py-3 bg-primary bg-gradient text-center">
+      <div class="container">
+        <span
+          >© 2025 ADRES - Administradora de los Recursos del Sistema General de
+          Seguridad Social en Salud. Autor: Ing. JCCG</span
+        >
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
